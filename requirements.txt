@@ -1,2 +1,5 @@
 streamlit
-streamlit-teachablemachine
+tf2onnx
+onnxruntime
+pillow
+numpy
