@@ -1,5 +1,0 @@
-my-emotion-app/
-├── keras_model.h5      <-- Teachable Machine에서 다운로드한 모델 파일
-├── labels.txt         <-- Teachable Machine에서 다운로드한 클래스 이름 파일
-├── requirements.txt   <-- 필요한 라이브러리 및 버전 지정
-└── app.py             <-- Streamlit 메인 코드 파일
