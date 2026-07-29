@@ -1,5 +1,5 @@
 import streamlit as st
-import tensorflow as tf
+import keras
 from PIL import Image, ImageOps
 import numpy as np
 
@@ -46,10 +46,10 @@ st.markdown("""
 st.markdown("<h1 class='title-text'>✨ AI 기분 측정기 ✨</h1>", unsafe_allow_html=True)
 st.write("카메라로 얼굴 사진을 찍어주세요! 당신의 기분을 알려드릴게요 🌸")
 
-# 3. 모델 및 라벨 로드 (캐싱을 이용해 로딩 속도 최적화)
+# 3. 모델 및 라벨 로드 (tf.keras 대신 keras 사용)
 @st.cache_resource
 def load_my_model():
-    model = tf.keras.models.load_model('keras_model.h5', compile=False)
+    model = keras.models.load_model('keras_model.h5', compile=False)
     with open('labels.txt', 'r', encoding='utf-8') as f:
         class_names = [line.strip() for line in f.readlines()]
     return model, class_names
@@ -82,7 +82,7 @@ if img_file_buffer is not None:
         class_name = class_names[index]
         confidence_score = prediction[0][index]
 
-    # 클래스 명 정리 (보통 라벨 파일에 '0 웃음', '1 슬픔' 형태로 들어있으므로 숫자를 제거)
+    # 클래스 명 정리 (라벨 파일의 '0 웃음', '1 슬픔' 형태에서 숫자 제거)
     clean_label = class_name.split(' ', 1)[-1] if ' ' in class_name else class_name
 
     # 결과 출력
